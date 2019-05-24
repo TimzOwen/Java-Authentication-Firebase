@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         progressDialog.setMessage("Registering, please Wait.....");
         progressDialog.show();
+        progressDialog.setCanceledOnTouchOutside(false);
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                     {
                         if (task.isSuccessful())
                         {
+                            progressDialog.dismiss;
                             Toast.makeText(MainActivity.this, "Registered successfully", Toast.LENGTH_LONG).show();
                         }
                         else
