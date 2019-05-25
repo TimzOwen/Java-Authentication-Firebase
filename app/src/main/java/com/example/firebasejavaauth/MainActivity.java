@@ -75,7 +75,15 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task)
                     {
-                        
+                        if (task.isSuccessful())
+                        {
+                            Toast.makeText(MainActivity.this, "Registered successfully", Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(MainActivity.this, "Could not Register try Again", Toast.LENGTH_LONG).show();
+
+                        }
 
                     }
                 });
