@@ -1,3 +1,4 @@
+//GOOGLE AUTH SING IN
 
 List<AuthUI.IdpConfig> providers = Arrays.asList(
         new AuthUI.IdpConfig.EmailBuilder().build(),
@@ -33,4 +34,38 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             // ...
         }
     }
+}
+
+
+//Email sign In
+ActionCodeSettings actionCodeSettings = ActionCodeSettings.newBuilder()
+        .setAndroidPackageName(/* yourPackageName= */ ..., /* installIfNotAvailable= */ true,
+        /* minimumVersion= */ null)
+        .setHandleCodeInApp(true) // This must be set to true
+        .setUrl("https://google.com") // This URL needs to be whitelisted
+        .build();
+
+startActivityForResult(
+        AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(Arrays.asList(
+                        new AuthUI.IdpConfig.EmailBuilder().enableEmailLinkSignIn()
+                        .setActionCodeSettings(actionCodeSettings).build())
+                .build(),
+        RC_SIGN_IN);
+
+        if (AuthUI.canHandleIntent(getIntent())) {
+    if (getIntent().getExtras() == null) {
+            return;
+        }
+        String link = getIntent().getExtras().getString(ExtraConstants.EMAIL_LINK_SIGN_IN);
+        if (link != null) {
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setEmailLink(link)
+                            .setAvailableProviders(getAvailableProviders())
+                            .build(),
+                    RC_SIGN_IN);
+        }
 }
