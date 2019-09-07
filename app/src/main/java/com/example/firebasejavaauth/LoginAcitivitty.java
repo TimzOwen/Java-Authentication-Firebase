@@ -37,5 +37,20 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         progressDialog = new ProgressDialog(this);
       //initialize firebase
         firebaseAuth = FirebaseAuth.getInstance();
+        
+        //call the function to find the IDS
+        collectIds();
+    }
+    public void collectIdss()
+    {
+        TextView tvName = findViewById(R.id.name);
+        TextView tvPass = findViewBy(R.id.pass);
+    }
+    public void ValidateUser()
+    {
+        //get the data 
+        name = tvName.getString.trim();
+        
+        BtnLogin.
     }
 }
